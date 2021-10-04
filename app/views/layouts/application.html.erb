@@ -11,6 +11,36 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <header>
+        <div>
+          <%= link_to root_path do %>
+            <img src="/assets/okiumi_logo.png" alt="logo" id="logo">
+          <% end %>
+        </div>
+        <>
+          <%= link_to "新規投稿", new_post_path, class: "text-white" %>
+        <div>
+          <%= link_to "ユーザー一覧", users_path, class: "text-white" %>
+        </div>
+        <div>
+          <%= link_to "投稿一覧", posts_path, class: "text-white" %>
+        </div>
+        <div>
+          <%= link_to "マイページ", user_path(current_user.id), class: "text-white" %>
+        </div>
+        <div>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-white" %>
+        </div>
+      <% else %>
+        <div>
+          <%= link_to "ユーザー一覧", users_path, class: "text-white" %>
+        </div>
+        <div>
+          <%= link_to "投稿一覧", posts_path, class: "text-white" %>
+        </div>
+      <% end %>
+      </header>
     <%= yield %>
   </body>
 </html>
