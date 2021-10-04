@@ -3,3 +3,7 @@
   <hr>
   <p><span>ツイート内容: </span><%=link_to post.body, post_path(post.id) %></p>
 <% end %>
+<% @favorite_posts.each do |post| %>
+  <hr>
+  <p><span>ファボツイート内容: </span><%=link_to post.body, post_path(post.id) %></p>
+<% end %>
