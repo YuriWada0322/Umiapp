@@ -1,3 +1,20 @@
-<p><span>email: </span><%= @user.name %></p>
+<p><span>name: </span><%= @user.name %></p>
 <p><span>email: </span><%= @user.email %></p>
 <p><span>ツイート内容: </span><%= @post.body %></p>
+
+<%= form_for([@post, @comment]) do |f| %>
+  <p>
+    <%= f.label :comment,"コメント" %>
+    <%= f.text_field :comment %>
+  </p>
+  <%= f.submit %>
+<% end %>
+<% @comments.each do |comment| %>
+  <hr>
+  <p><span>email: </span><%=link_to comment.user.email, user_path(comment.user.id) %></p>
+  <p><span>コメント内容: </span><%= comment.comment %></p>
+  <% if comment.user == current_user %>
+
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn-sm btn-danger" %>
+      <% end %>
+<% end %>
