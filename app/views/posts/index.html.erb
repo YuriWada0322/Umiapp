@@ -8,7 +8,7 @@
       <div class="one-post">
         <%= link_to post_path(post) do %>
         <p class="caption">ユーザ名</p>
-          <%= image_tag post.image, size:"300x200" %>
+
         <p class="caption mb-0"><%= post.location %></p>
         <p class="caption"><%= "#{post.comments.count} コメント" %></p>
         <% end %>

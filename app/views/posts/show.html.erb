@@ -9,6 +9,9 @@
   </p>
   <%= f.submit %>
 <% end %>
+<%= link_to '編集する', edit_post_path(@post.id) %><br>
+<%= link_to '投稿一覧ページへ', posts_path %>
+
 <% @comments.each do |comment| %>
   <hr>
   <p><span>email: </span><%=link_to comment.user.email, user_path(comment.user.id) %></p>

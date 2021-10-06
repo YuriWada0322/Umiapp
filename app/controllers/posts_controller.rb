@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+
+  def index
+    @posts = Post.all.page(params[:page]).per(6)
+  end
+
   def new
     @post = Post.new
   end
@@ -11,8 +16,14 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def index
-    @posts = Post.all
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    post = Post.find(params[:id])
+    post.update(post_params)
+    redirect_to post_path(post.id)
   end
 
   def show
