@@ -1,23 +1,41 @@
-<p><span>name: </span><%= @user.name %></p>
-<p><span>email: </span><%= @user.email %></p>
-<p><span>ツイート内容: </span><%= @post.body %></p>
+<div class="cover-show">
+  <div class="container">
+    <div class="d-flex">
+      <div class="row justify-content-center d-block">
+          <% if @post.images.attached? %>
+            <% @post.images.each do |image| %>
+              <%= image_tag image, size:"400x300" %> <br>
+            <% end %>
+          <% end %>
+          <p class="caption"><%= @post.location %></p>
+          <p id="text"><%= @post.body %></p>
+          <%= link_to '編集する', edit_post_path(@post.id), class: "btn btn-info mr-3" %>
+          <%= link_to '削除する', post_path(@post.id),method: :delete, "data-confirm"=>"本当に消しますか？", class: "btn btn-danger" %><br>
+          <%= link_to '投稿一覧ページへ', posts_path, class: "btn btn-dark mt-3" %>
+      </div>
 
-<%= form_for([@post, @comment]) do |f| %>
-  <p>
-    <%= f.label :comment,"コメント" %>
-    <%= f.text_field :comment %>
-  </p>
-  <%= f.submit %>
-<% end %>
-<%= link_to '編集する', edit_post_path(@post.id) %><br>
-<%= link_to '投稿一覧ページへ', posts_path %>
+      <div class="comments ml-5 mt-5">
+        <%= form_for([@post, @comment]) do |f| %>
+          <%= f.text_field :comment, :size=>"60x3",placeholder: "コメントする" %>
+          <%= f.submit "送信する", class: "btn btn-success mb-4" %>
+        <% end %>
 
-<% @comments.each do |comment| %>
-  <hr>
-  <p><span>email: </span><%=link_to comment.user.email, user_path(comment.user.id) %></p>
-  <p><span>コメント内容: </span><%= comment.comment %></p>
-  <% if comment.user == current_user %>
-
-      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn-sm btn-danger" %>
-      <% end %>
-<% end %>
+        <p>コメント件数：<%= @comments.count %></p>
+          <% @comments.each do |comment| %>
+            <div class="comments-index mb-2">
+              <%= comment.user.name %>
+              <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+              <div class="d-flex">
+                <%= comment.comment %>
+                <% if comment.user == current_user %>
+                  <div class="comment-delete">
+                    <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn-sm btn-danger" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

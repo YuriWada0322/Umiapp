@@ -1,3 +1,27 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.cover-new {
+  height: 100%;
+  width: 100%;
+  background-color: #f7f3e8;
+
+}
+
+.form-label {
+  font-size: 20px;
+  background-color: lightblue;
+}
+
+.form-group {
+  width: 600px;
+}
+
+.comments-index {
+  background-color: #fff;
+  border: 1px #000 solid;
+}
+
+.comment-delete {
+  margin-left: auto;
+}
